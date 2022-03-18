@@ -5,6 +5,7 @@ where number of accounts is &gt; 1
 WITH MultipleAccounts AS 
 (
     SELECT  AccountKey
+            , CustomerKey
     FROM    DimAccountCustomerBridge
     WHERE   CustomerKey IN
             (
@@ -19,10 +20,10 @@ WITH MultipleAccounts AS
     AND     EffectiveToDateTime > GETDATE()
 )
 
-SELECT  DimAccountCustomerBridge.CustomerKey
+SELECT  MultipleAccounts.CustomerKey
         ,SUM(FactAccountBalance.CurrentBalance)
-FROM    FactAccountBalance
-JOIN    DimAccountCustomerBridge
-ON      FactAccountBalance.AccountKey = DimAccountCustomerBridge.AccountKey 
+FROM    MultipleAccounts
+JOIN    FactAccountBalance
+ON      FactAccountBalance.AccountKey = MultipleAccounts.AccountKey 
 GROUP BY    
-        DimAccountCustomerBridge.CustomerKey;
+        MultipleAccounts.CustomerKey;
