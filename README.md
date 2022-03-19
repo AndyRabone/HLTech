@@ -50,8 +50,7 @@ WHERE   DimAccountCustomerBridge.AccountKey IS NULL ;
 
 
 ### Exercise Five
-Where transformation is performed in flight (ETL):
-In order of investigation, eliminate the following causes:
+Where transformation is performed in flight (ETL). In order of investigation, eliminate the following causes:
 - Observe the pipeline in a production-like environment to ascertain whether bottle necks are caused by badly performing automated tests etc rather than the data load itself.
 - Ensure any indices on the target table are being dropped prior to loading as large indices can significantly slow down DML operations.
 - Indices on source tables should be appropriately selected, and existing indices inspected for stale statistics.
@@ -60,8 +59,7 @@ In order of investigation, eliminate the following causes:
 - Consider if there is any performance improvement 'pushing down' complex transformations to the target database (ELT).
 
 
-Where staging or transformation is executed in the target system (ELT):
-In order of investigation, eliminate the following causes:
+Where staging or transformation is executed in the target system (ELT). In order of investigation, eliminate the following causes:
 - Ensure any indices on landing entities are dropped prior to load.
 - Ensure those indices are rebuilt post load and are tailored to downstream transformation logic.
 - Run the underlying SQL from any transformation views or stored procedures, observing the execution plan for any obvious bottlenecks. Eliminate complex logic and data type conversions in join predicates where possible.
