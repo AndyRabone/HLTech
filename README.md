@@ -106,7 +106,7 @@ for file_path in (target_archive_location, target_file_location):
 wget.download(name_link, out=target_archive_location)
 
 if not os.path.exists(target_archive_location):
-    raise Exception("File '{}' failed to download to the target location.".format(name_link))
+    raise Exception(f"File '{name_link}' failed to download to the target location.")
 
 with gzip.open(target_archive_location, 'rb') as f_in:
     with open(target_file_location, 'wb') as f_out:
